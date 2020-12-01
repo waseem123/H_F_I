@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    app:cardCornerRadius="8dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradbg"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_planimage"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_025_gym" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:fontFamily="@font/open_sans"
+                android:padding="4dp"
+                android:text="Title"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:fontFamily="@font/open_sans"
+                android:padding="4dp"
+                android:text="SubTitle"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <WebView
+            android:id="@+id/wv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_title"
+            android:layout_margin="8dp"
+            android:padding="4dp"
+            android:text="Description"
+            android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/btn_subscribe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:background="@drawable/roundedbackground"
+        android:padding="4dp"
+        android:text="Subscribe"
+        android:textColor="@color/colorWhite" />
+</RelativeLayout></androidx.cardview.widget.CardView>
+
