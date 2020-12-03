@@ -41,10 +41,9 @@ public class UserSessionManager {
     }
 
     //    Create Login Session
-    public void createUserLoginSession(String userid, String username, String email, String auth_token, String role) {//, String roleid, String rolename, String profileimage, String companyid, String companyname, String siteid, String sitename) {
-
-
-        editor.putString(KEY_UserId, userid);
+    public void createUserLoginSession(String user_id, String username, String email, String auth_token, String role) {//, String roleid, String rolename, String profileimage, String companyid, String companyname, String siteid, String sitename) {
+        editor.putBoolean(IS_USER_LOGIN, true);
+        editor.putString(KEY_UserId, user_id);
         editor.putString(KEY_UserName, username);
         editor.putString(KEY_Email, email);
         editor.putString(KEY_AuthToken, auth_token);
@@ -56,9 +55,8 @@ public class UserSessionManager {
      * checkLogin method will check user login status
      * If false it will redirect the user to login page
      * Else do anything
-     * @param planActivity
      */
-    public boolean checkLogin(String planActivity) {
+    public boolean checkLogin() {
         if (!(this.isUserLoggedIn())) {
 //            user is not logged in redirect to login activity
             Intent intent = new Intent(mContext, LoginActivity.class);

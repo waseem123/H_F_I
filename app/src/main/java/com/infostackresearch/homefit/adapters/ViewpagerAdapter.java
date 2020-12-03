@@ -25,12 +25,19 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ViewpagerAdapter extends RecyclerView.Adapter<ViewpagerAdapter.PlanHolder> {
 
-    List<Plans> plansList;
-    Context mContext;
+    private boolean upgrade;
+    private List<Plans> plansList;
+    private Context mContext;
 
     public ViewpagerAdapter(Context mContext, List<Plans> plansList) {
         this.mContext = mContext;
         this.plansList = plansList;
+    }
+
+    public ViewpagerAdapter(Context mContext, List<Plans> plansList, boolean upgrade) {
+        this.mContext = mContext;
+        this.plansList = plansList;
+        this.upgrade = upgrade;
     }
 
     @NonNull
@@ -54,6 +61,8 @@ public class ViewpagerAdapter extends RecyclerView.Adapter<ViewpagerAdapter.Plan
         String encoding = "utf-8";
         holder.wv_description.loadDataWithBaseURL(null, description, mime, encoding, null);
 
+        if (upgrade)
+            holder.btn_subscribe.setText("Upgrade");
         holder.btn_subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +74,7 @@ public class ViewpagerAdapter extends RecyclerView.Adapter<ViewpagerAdapter.Plan
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         UserSessionManager sessionManager = new UserSessionManager(mContext);
-                        if (sessionManager.checkLogin("PlanActivity"))
+                        if (sessionManager.checkLogin())
                             ((Activity) mContext).finish();
                         Toast.makeText(mContext, "Subscription Success", Toast.LENGTH_SHORT).show();
                         pDialog.dismissWithAnimation();

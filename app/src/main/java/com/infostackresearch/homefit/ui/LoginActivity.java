@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.infostackresearch.homefit.R;
 import com.infostackresearch.homefit.http.APIService;
 import com.infostackresearch.homefit.http.ClientInstance;
@@ -18,11 +19,6 @@ import com.infostackresearch.homefit.http.NetworkConnectivity;
 import com.infostackresearch.homefit.models.LoginData;
 import com.infostackresearch.homefit.models.LoginModel;
 import com.infostackresearch.homefit.sessions.UserSessionManager;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
@@ -34,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText ed_username;
     EditText ed_password;
     TextView tv_signup;
+
+    TextInputLayout til_loginid, til_password;
 
     NetworkConnectivity networkConnectivity = new NetworkConnectivity(LoginActivity.this);
     private UserSessionManager session;
@@ -50,6 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         ed_username = findViewById(R.id.ed_username);
         ed_password = findViewById(R.id.ed_password);
         tv_signup = findViewById(R.id.tv_signup);
+
+        til_loginid = findViewById(R.id.til_loginid);
+        til_password = findViewById(R.id.til_password);
+
+        til_loginid.setStartIconTintList(null);
+        til_password.setStartIconTintList(null);
 
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,14 +87,19 @@ public class LoginActivity extends AppCompatActivity {
         APIService service = ClientInstance.getRetrofitInstance().create(APIService.class);
 
 
-        Call<LoginModel> call = service.doLogin(new LoginData(email,password));
+        Call<LoginModel> call = service.doLogin(new LoginData(email, password));
         call.enqueue(new Callback<LoginModel>() {
             @Override
             public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
                 progressDialog.dismiss();
                 if (response.body().getStatus_code().equals("200")) {
                     Toast.makeText(LoginActivity.this, "Authentication Success.", Toast.LENGTH_SHORT).show();
-                    session.createUserLoginSession(response.body().getUser().getId(), response.body().getUser().getUsername(), response.body().getUser().getEmail(), response.body().getUser().getToken(), "employee");
+                    String token = response.body().getUser().getToken();
+                    session.createUserLoginSession(response.body().getUser().getId(),
+                            response.body().getUser().getUsername(),
+                            response.body().getUser().getEmail(),
+                            token.substring(token.lastIndexOf("|") + 1),
+                            "employee");
                     ed_username.setText("");
                     ed_password.setText("");
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);

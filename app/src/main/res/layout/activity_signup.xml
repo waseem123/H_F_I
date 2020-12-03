@@ -48,7 +48,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:hint="Username">
+                    android:hint="Username"
+                    app:startIconDrawable="@drawable/ic_name">
 
                     <EditText
                         android:id="@+id/ed_username"
@@ -57,36 +58,72 @@
                         android:fontFamily="@font/open_sans"
                         android:imeOptions="actionNext"
                         android:inputType="text"
+                        android:maxLines="1"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_mobilenumber"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <LinearLayout
+                    android:id="@+id/ll_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/til_username"
-                    android:layout_margin="8dp"
-                    android:hint="Mobile Number">
+                    android:layout_below="@+id/til_username"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
 
-                    <EditText
-                        android:id="@+id/ed_mobilenumber"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_countrycode"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans"
-                        android:imeOptions="actionNext"
-                        android:inputType="phone"
-                        android:singleLine="true" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_below="@id/til_username"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:hint="Country Code">
+
+                        <EditText
+                            android:id="@+id/ed_countrycode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="91" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_mobilenumber"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/til_username"
+                        android:layout_margin="8dp"
+                        android:layout_weight="3"
+                        android:hint="Mobile Number"
+                        app:startIconDrawable="@drawable/ic_smartphone">
+
+                        <EditText
+                            android:id="@+id/ed_mobilenumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/til_mobilenumber"
+                    android:layout_below="@id/ll_mobile"
                     android:layout_margin="8dp"
-                    android:hint="Email">
+                    android:hint="Email"
+                    app:startIconDrawable="@drawable/ic_email">
 
                     <EditText
                         android:id="@+id/ed_email"
@@ -95,6 +132,7 @@
                         android:fontFamily="@font/open_sans"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
+                        android:maxLines="1"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,7 +143,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/til_email"
                     android:layout_margin="8dp"
-                    android:hint="Password">
+                    android:hint="Password"
+                    app:startIconDrawable="@drawable/ic_pin_code">
 
                     <EditText
                         android:id="@+id/ed_password"
@@ -114,6 +153,7 @@
                         android:fontFamily="@font/open_sans"
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
+                        android:maxLines="1"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,6 +173,7 @@
                         android:fontFamily="@font/open_sans"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
+                        android:maxLines="1"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 

@@ -34,6 +34,8 @@ public class PlanActivity extends AppCompatActivity {
     private NetworkConnectivity networkConnectivity;
     private Toolbar toolbar;
     private ProgressDialog progressDialog;
+    private boolean upgrade;
+    private Bundle bundle;
 //    int[] images = {R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background};
 
     @Override
@@ -51,6 +53,12 @@ public class PlanActivity extends AppCompatActivity {
         tv_nodata = findViewById(R.id.tv_nodata);
         networkConnectivity = new NetworkConnectivity(PlanActivity.this);
         progressDialog = new ProgressDialog(PlanActivity.this);
+
+        bundle = new Bundle();
+        bundle = getIntent().getExtras();
+
+        if (bundle != null)
+            upgrade = bundle.getBoolean("upgrade");
 
         if (networkConnectivity.isOnline()) {
             progressDialog.setMessage("Fetching best plans for you...");
@@ -76,7 +84,7 @@ public class PlanActivity extends AppCompatActivity {
                 if (response.body().isSuccess()) {
                     tv_nodata.setVisibility(View.GONE);
                     List<Plans> plansList = response.body().getPlansList();
-                    adapter = new ViewpagerAdapter(PlanActivity.this, plansList);
+                    adapter = new ViewpagerAdapter(PlanActivity.this, plansList, upgrade);
                     vp_plandata.setAdapter(adapter);
                     vp_plandata.setClipToPadding(false);
                     vp_plandata.setClipChildren(false);
