@@ -1,7 +1,10 @@
 package com.infostackresearch.homefit.ui;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,7 @@ public class MySubscriptionActivity extends AppCompatActivity {
     private int plan_id;
     private NetworkConnectivity networkConnectivity;
     private ProgressDialog progressDialog;
+    private TextView tv_description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,9 @@ public class MySubscriptionActivity extends AppCompatActivity {
         networkConnectivity = new NetworkConnectivity(MySubscriptionActivity.this);
         bundle = new Bundle();
         bundle = getIntent().getExtras();
+
+        tv_description = findViewById(R.id.tv_description);
+
         if (bundle != null)
             plan_id = bundle.getInt("my_plan");
 
@@ -60,10 +67,16 @@ public class MySubscriptionActivity extends AppCompatActivity {
             pDialog.show();
         }
 
-        toolbar.setTitle("Plan Name");
+        toolbar.setTitle("abc");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tv_description.setText(Html.fromHtml("<ul><li>abc<\\/li><li>sad<\\/li><li>sa<\\/li><li>ad<\\/li><\\/ul>", Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            tv_description.setText(Html.fromHtml("<ul><li>abc<\\/li><li>sad<\\/li><li>sa<\\/li><li>ad<\\/li><\\/ul>"));
+        }
 
     }
 
