@@ -18,8 +18,8 @@ public class UserSessionManager {
     public static final String KEY_Email = "email";
     public static final String KEY_Mobile = "mobile";
     public static final String KEY_Role = "role";
-    private static final String IS_USER_LOGIN = "IsUserLoggedIn";
-    public static String KEY_AuthToken = "auth_token";
+    public static final String IS_USER_LOGIN = "IsUserLoggedIn";
+    public static final String KEY_AuthToken = "auth_token";
     public static final String KEY_ProfilePic = "profile_pic";
     public static final String PREFER_NAME = "HomeFitPref";
 

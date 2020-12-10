@@ -1,5 +1,6 @@
 package com.infostackresearch.homefit.ui.profile;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,11 +17,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.infostackresearch.homefit.R;
+import com.infostackresearch.homefit.http.APIService;
+import com.infostackresearch.homefit.http.ClientInstance;
+import com.infostackresearch.homefit.http.NetworkConnectivity;
+import com.infostackresearch.homefit.models.ProfileSubscription;
 import com.infostackresearch.homefit.sessions.UserSessionManager;
 import com.infostackresearch.homefit.ui.MySubscriptionActivity;
 import com.infostackresearch.homefit.ui.PlanActivity;
 
 import java.util.HashMap;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
     private UserSessionManager sessionManager;
@@ -32,6 +42,10 @@ public class ProfileFragment extends Fragment {
     private TextView tv_upgradePlan;
     private CardView cv_viewPlan;
     private int plan_id = 1;
+    private String auth_token;
+    private NetworkConnectivity networkConnectivity;
+    private ProgressDialog progressDialog;
+    private TextView tv_plan_name;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -45,6 +59,7 @@ public class ProfileFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
         sessionManager = new UserSessionManager(getActivity().getApplicationContext());
+        networkConnectivity = new NetworkConnectivity(getActivity().getApplicationContext());
 
         tv_customer_id = root.findViewById(R.id.tv_customer_name);
         tv_customer_name = root.findViewById(R.id.tv_customer_name);
@@ -52,23 +67,37 @@ public class ProfileFragment extends Fragment {
         tv_email = root.findViewById(R.id.tv_email);
         cv_viewPlan = root.findViewById(R.id.cv_myplan);
         tv_upgradePlan = root.findViewById(R.id.tv_upgradeplan);
+        tv_plan_name = root.findViewById(R.id.tv_plan_name);
 //        btn_update = root.findViewById(R.id.btn_update);
 
         if (!sessionManager.checkLogin()) {
             HashMap<String, String> user = sessionManager.getUserDetails();
             user_id = user.get(UserSessionManager.KEY_UserId);
-            user_name = user.get(UserSessionManager.KEY_UserName);
-            user_mobile = user.get(UserSessionManager.KEY_Mobile);
-            user_email = user.get(UserSessionManager.KEY_Email);
+            auth_token = user.get(UserSessionManager.KEY_AuthToken);
+            if (networkConnectivity.isOnline()) {
+                progressDialog = new ProgressDialog(getActivity().getApplicationContext());
+                progressDialog.setMessage("Fetching your profile...");
+                progressDialog.show();
+                getUserSubscription(auth_token);
+            } else {
+                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity().getApplicationContext(), SweetAlertDialog.ERROR_TYPE);
+                pDialog.setTitleText("Connection Error!");
+                pDialog.setContentText("You are not connected to internet. Please check your internet connection.");
+                pDialog.show();
+            }
+
+//            user_name = user.get(UserSessionManager.KEY_UserName);
+//            user_mobile = user.get(UserSessionManager.KEY_Mobile);
+//            user_email = user.get(UserSessionManager.KEY_Email);
         } else {
             Toast.makeText(getActivity().getApplicationContext(), "You are not logged in.", Toast.LENGTH_SHORT).show();
             btn_update.setEnabled(false);
         }
 
-        tv_customer_id.setText(user_id);
-        tv_customer_name.setText(user_name);
-        tv_mobile_number.setText(user_mobile);
-        tv_email.setText(user_email);
+//        tv_customer_id.setText(user_id);
+//        tv_customer_name.setText(user_name);
+//        tv_mobile_number.setText(user_mobile);
+//        tv_email.setText(user_email);
 
 
 //        btn_update.setOnClickListener(new View.OnClickListener() {
@@ -99,5 +128,47 @@ public class ProfileFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private void getUserSubscription(String token) {
+        APIService service = ClientInstance.getRetrofitInstance().create(APIService.class);
+        Call<ProfileSubscription> call = service.getProfile("Bearer " + token);
+        call.enqueue(new Callback<ProfileSubscription>() {
+            @Override
+            public void onResponse(Call<ProfileSubscription> call, Response<ProfileSubscription> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful())
+                    if (response.body().isSuccess()) {
+                        tv_customer_id.setText(response.body().getUser().getId());
+                        tv_customer_name.setText(response.body().getUser().getName());
+                        tv_email.setText(response.body().getUser().getEmail());
+                        tv_mobile_number.setText(response.body().getUser().getPhone());
+
+                        for (int i = 0; i < response.body().getSubscriptionData().size(); i++) {
+                            tv_plan_name.setText(response.body().getSubscriptionData().get(i).getId());
+                        }
+                    } else {
+                        SweetAlertDialog pDialog = new SweetAlertDialog(getActivity().getApplicationContext(), SweetAlertDialog.ERROR_TYPE);
+                        pDialog.setTitleText("Error!");
+                        pDialog.setContentText("Internal error occured.");
+                        pDialog.show();
+                    }
+                else {
+                    SweetAlertDialog pDialog = new SweetAlertDialog(getActivity().getApplicationContext(), SweetAlertDialog.ERROR_TYPE);
+                    pDialog.setTitleText("Response Error!");
+                    pDialog.setContentText("Response is malformed.");
+                    pDialog.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileSubscription> call, Throwable t) {
+                progressDialog.dismiss();
+                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity().getApplicationContext(), SweetAlertDialog.ERROR_TYPE);
+                pDialog.setTitleText("Server Error!");
+                pDialog.setContentText(t.getMessage());
+                pDialog.show();
+            }
+        });
     }
 }

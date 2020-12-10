@@ -154,9 +154,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
+
                 android:orientation="vertical"
                 android:padding="8dp">
 
@@ -164,6 +162,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/open_sans"
                     android:text="My Subscription"
                     android:textSize="16sp" />
@@ -172,15 +174,14 @@
                     android:id="@+id/cv_myplan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:layout_margin="8dp"
                     app:cardCornerRadius="4dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="4dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="8dp">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tv_plan_name"
@@ -188,7 +189,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/open_sans"
-                            android:text="Plan"
+                            android:padding="8dp"
+                            android:text="abc"
                             android:textColor="@color/black"
                             android:textSize="24sp" />
 
@@ -197,8 +199,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="8dp"
                             android:text="Upgrade"
-                            android:textAlignment="inherit"
+                            android:textAlignment="center"
                             android:textColor="@color/colorPrimary" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>

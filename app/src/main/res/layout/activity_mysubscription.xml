@@ -24,9 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_margin="8dp"
             android:drawableLeft="@drawable/ic_020_stopwatch"
             android:drawablePadding="8dp"
             android:fontFamily="@font/open_sans"
@@ -57,7 +55,7 @@
                         android:drawablePadding="8dp"
                         android:fontFamily="@font/open_sans"
                         android:padding="4dp"
-                        android:text="From Date" />
+                        android:text="Start Date" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -87,7 +85,7 @@
                         android:drawablePadding="8dp"
                         android:fontFamily="@font/open_sans"
                         android:padding="4dp"
-                        android:text="To Date" />
+                        android:text="End Date" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -104,9 +102,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_margin="8dp"
             android:drawableLeft="@drawable/ic_024_checklist"
             android:drawablePadding="8dp"
             android:text="Description"
@@ -117,9 +113,9 @@
             android:id="@+id/cv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             app:cardCornerRadius="4dp"
-            app:cardElevation="4dp"
-            android:layout_margin="8dp">
+            app:cardElevation="4dp">
 
             <TextView
                 android:id="@+id/tv_description"
@@ -129,6 +125,34 @@
                 android:padding="4dp"
                 android:text="" />
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableLeft="@drawable/ic_money"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Price"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:drawableLeft="@drawable/ic_rupee"
+                android:drawablePadding="8dp"
+                android:text="100"
+                android:textColor="@color/black" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
     <Button
@@ -136,8 +160,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="8dp"
-        android:fontFamily="@font/open_sans"
         android:background="@drawable/roundedbackground"
+        android:fontFamily="@font/open_sans"
         android:text="Renew"
         android:textColor="@color/colorWhite" />
 </RelativeLayout>
