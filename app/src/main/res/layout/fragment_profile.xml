@@ -154,7 +154,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:orientation="vertical"
                 android:padding="8dp">
 
@@ -167,68 +166,52 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/open_sans"
-                    android:text="My Subscription"
+                    android:text="My Subscriptions"
                     android:textSize="16sp" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_myplan"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_myplans"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp">
+                    android:layout_marginBottom="?attr/actionBarSize" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_plan_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/open_sans"
-                            android:padding="8dp"
-                            android:text="abc"
-                            android:textColor="@color/black"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:id="@+id/tv_upgradeplan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:padding="8dp"
-                            android:text="Upgrade"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorPrimary" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-                <!--                <TextView-->
-                <!--                    android:id="@+id/tv_viewplan"-->
-                <!--                    android:layout_width="wrap_content"-->
+                <!--                <androidx.cardview.widget.CardView-->
+                <!--                    android:id="@+id/cv_myplan"-->
+                <!--                    android:layout_width="match_parent"-->
                 <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_alignParentRight="true"-->
-                <!--                    android:text="View My Plan"-->
-                <!--                    android:textAlignment="inherit"-->
-                <!--                    android:textColor="@color/colorPrimary" />-->
-            </LinearLayout>
+                <!--                    android:layout_margin="8dp"-->
+                <!--                    app:cardCornerRadius="4dp"-->
+                <!--                    app:cardElevation="4dp">-->
 
-            <!--            <Button-->
-            <!--                android:id="@+id/btn_update"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_margin="8dp"-->
-            <!--                android:layout_marginLeft="8dp"-->
-            <!--                android:layout_marginTop="8dp"-->
-            <!--                android:layout_marginRight="8dp"-->
-            <!--                android:background="@drawable/roundedbackground"-->
-            <!--                android:fontFamily="@font/open_sans"-->
-            <!--                android:text="Edit Profile"-->
-            <!--                android:textColor="@color/colorWhite" />-->
+                <!--                    <RelativeLayout-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:orientation="horizontal">-->
+
+                <!--                        <TextView-->
+                <!--                            android:id="@+id/tv_plan_name"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_gravity="center"-->
+                <!--                            android:fontFamily="@font/open_sans"-->
+                <!--                            android:padding="8dp"-->
+                <!--                            android:text="abc"-->
+                <!--                            android:textColor="@color/black"-->
+                <!--                            android:textSize="24sp" />-->
+
+                <!--                        <TextView-->
+                <!--                            android:id="@+id/tv_upgradeplan"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_alignParentRight="true"-->
+                <!--                            android:layout_centerVertical="true"-->
+                <!--                            android:padding="8dp"-->
+                <!--                            android:text="Upgrade"-->
+                <!--                            android:textAlignment="center"-->
+                <!--                            android:textColor="@color/colorPrimary" />-->
+                <!--                    </RelativeLayout>-->
+                <!--                </androidx.cardview.widget.CardView>-->
+            </LinearLayout>
         </LinearLayout>
-        <!--        </androidx.cardview.widget.CardView>-->
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -58,6 +58,7 @@
                         android:text="Start Date" />
 
                     <TextView
+                        android:id="@+id/tv_startdate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -88,6 +89,7 @@
                         android:text="End Date" />
 
                     <TextView
+                        android:id="@+id/tv_enddate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -133,7 +135,7 @@
             android:drawableLeft="@drawable/ic_money"
             android:drawablePadding="8dp"
             android:fontFamily="@font/open_sans"
-            android:text="Price"
+            android:text="Payment"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 
@@ -144,14 +146,50 @@
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:drawableLeft="@drawable/ic_rupee"
-                android:drawablePadding="8dp"
-                android:text="100"
-                android:textColor="@color/black" />
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_margin="@dimen/dimen_8dp"
+                        android:fontFamily="@font/open_sans"
+                        android:padding="@dimen/dimen_8dp"
+                        android:text="Payment ID" />
+
+                    <TextView
+                        android:id="@+id/tv_paymentid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/dimen_8dp"
+                        android:fontFamily="@font/open_sans"
+                        android:padding="8dp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="8dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:drawableLeft="@drawable/ic_rupee"
+                    android:drawablePadding="8dp"
+                    android:text="100"
+                    android:textColor="@color/black" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 

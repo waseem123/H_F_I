@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_8dp"
+    app:cardCornerRadius="@dimen/dimen_4dp"
+    app:cardElevation="@dimen/dimen_4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradbg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_subscriptionid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:padding="@dimen/dimen_8dp"
+            android:text="Subscription ID - 0"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/dimen_8dp"
+            android:background="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/tv_planid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:padding="@dimen/dimen_8dp"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="64sp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

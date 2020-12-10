@@ -23,10 +23,25 @@ public class MySubscriptionActivity extends AppCompatActivity {
     private String user_id, user_name, user_mobile, user_email;
     private Toolbar toolbar;
     private Bundle bundle;
-    private int plan_id;
+
+    private String plan_id;
+    private String u_id;
+    private String subscription_id;
+    private String price;
+    private String payment_id;
+    private String start_date;
+    private String end_date;
+    private String is_expired;
+    private String created_at;
+    private String updated_at;
+
     private NetworkConnectivity networkConnectivity;
     private ProgressDialog progressDialog;
     private TextView tv_description;
+    private TextView tv_startdate;
+    private TextView tv_enddate;
+    private TextView tv_price;
+    private TextView tv_paymentid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +53,31 @@ public class MySubscriptionActivity extends AppCompatActivity {
         bundle = new Bundle();
         bundle = getIntent().getExtras();
 
+        tv_startdate = findViewById(R.id.tv_startdate);
+        tv_enddate = findViewById(R.id.tv_enddate);
+        tv_price = findViewById(R.id.tv_price);
         tv_description = findViewById(R.id.tv_description);
+        tv_paymentid = findViewById(R.id.tv_paymentid);
 
-        if (bundle != null)
-            plan_id = bundle.getInt("my_plan");
+        if (bundle != null) {
+            plan_id = bundle.getString("id");
+            u_id = bundle.getString("user_id");
+            subscription_id = bundle.getString("subscription_id");
+            payment_id = bundle.getString("payment_id");
 
+            price = bundle.getString("price");
+
+            start_date = bundle.getString("start_date");
+            end_date = bundle.getString("end_date");
+
+            created_at = bundle.getString("created_at");
+            updated_at = bundle.getString("updated_at");
+        }
+
+        tv_price.setText(price);
+        tv_startdate.setText(start_date);
+        tv_enddate.setText(end_date);
+        tv_paymentid.setText(payment_id);
         if (!sessionManager.checkLogin()) {
             HashMap<String, String> user = sessionManager.getUserDetails();
             user_id = user.get(UserSessionManager.KEY_UserId);
