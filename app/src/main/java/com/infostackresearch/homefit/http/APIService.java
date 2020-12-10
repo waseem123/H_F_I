@@ -2,6 +2,8 @@ package com.infostackresearch.homefit.http;
 
 import com.infostackresearch.homefit.models.LoginData;
 import com.infostackresearch.homefit.models.LoginModel;
+import com.infostackresearch.homefit.models.PayData;
+import com.infostackresearch.homefit.models.PaymentHash;
 import com.infostackresearch.homefit.models.PlanResponse;
 import com.infostackresearch.homefit.models.ProfileSubscription;
 import com.infostackresearch.homefit.models.SignUp;
@@ -29,6 +31,10 @@ public interface APIService {
     @Headers("Content-Type: application/json")
     @GET("customer/sp/user-sp")
     Call<ProfileSubscription> getProfile(@Header("Authorization") String authToken);
+
+    @Headers("Content-Type: application/json")
+    @POST("get-hash")
+    Call<PaymentHash> getHash(@Body PayData payData);
 
 //    @FormUrlEncoded
 //    @POST("admin-login.php")

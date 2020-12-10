@@ -16,10 +16,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
+        <activity android:name=".ui.PaymentActivity"></activity>
         <activity
             android:name=".ui.MySubscriptionActivity"
             android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.EditProfileActivity"
             android:parentActivityName=".ui.MainActivity"
@@ -33,7 +34,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.LoginActivity"
-            android:theme="@style/MaterialTheme"></activity>
+            android:theme="@style/MaterialTheme" />
         <activity
             android:name=".ui.NavigationActivity"
             android:label="@string/title_activity_navigation"
