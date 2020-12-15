@@ -84,10 +84,12 @@ public class ViewpagerAdapter extends RecyclerView.Adapter<ViewpagerAdapter.Plan
                         HashMap<String, String> user = sessionManager.getUserDetails();
                         String auth_token = user.get(UserSessionManager.KEY_AuthToken);
                         String mobilenumber = user.get(UserSessionManager.KEY_Mobile);
-                        String amount = plansList.get(position).getPrice();
+                        double amount = Integer.parseInt(plansList.get(position).getPrice());
                         String planid = plansList.get(position).getPlan_id();
-                        String discount = plansList.get(position).getDiscount();
+                        double discount = Double.parseDouble(plansList.get(position).getDiscount());
                         String product_title = plansList.get(position).getTitle();
+
+                        sessionManager.createPlanData(planid, product_title, amount + "", discount + "");
 
                         Intent intent = new Intent(mContext, PaymentActivity.class);
                         intent.putExtra("product_title", product_title);

@@ -7,6 +7,8 @@ import com.infostackresearch.homefit.models.PaymentHash;
 import com.infostackresearch.homefit.models.PlanResponse;
 import com.infostackresearch.homefit.models.ProfileSubscription;
 import com.infostackresearch.homefit.models.SignUp;
+import com.infostackresearch.homefit.models.SubscribeUser;
+import com.infostackresearch.homefit.models.SubscriptionData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -35,6 +37,10 @@ public interface APIService {
     @Headers("Content-Type: application/json")
     @POST("get-hash")
     Call<PaymentHash> getHash(@Body PayData payData);
+
+    @Headers("Content-Type: application/json")
+    @POST("customer/user-subscribe")
+    Call<SubscribeUser> doSubscription(@Body SubscriptionData subscriptionData, @Header("Authorization") String auth_token);
 
 //    @FormUrlEncoded
 //    @POST("admin-login.php")

@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                             response.body().getUser().getUsername(),
                             response.body().getUser().getEmail(),
                             token.substring(token.lastIndexOf("|") + 1),
-                            "employee");
+                            "employee", "1", "16, Hotgi Rd, Solapur");
                     ed_username.setText("");
                     ed_password.setText("");
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);

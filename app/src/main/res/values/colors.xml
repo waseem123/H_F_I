@@ -9,5 +9,6 @@
     <color name="colorSecondary">#ebeeff</color>
     <color name="colorAccent">#4bd6f2</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDark">#523fcc</color>
     <color name="black">#000000</color>
 </resources>

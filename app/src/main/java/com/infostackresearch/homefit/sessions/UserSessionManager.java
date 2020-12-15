@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.infostackresearch.homefit.http.APIService;
-import com.infostackresearch.homefit.http.ClientInstance;
+import com.infostackresearch.homefit.DeliveryAddressActivity;
 import com.infostackresearch.homefit.ui.LoginActivity;
+import com.infostackresearch.homefit.ui.PlanActivity;
 
 import java.util.HashMap;
 
@@ -23,6 +23,15 @@ public class UserSessionManager {
     public static final String KEY_ProfilePic = "profile_pic";
     public static final String PREFER_NAME = "HomeFitPref";
 
+    public static final String KEY_AddressID = "addressid";
+    public static final String KEY_Address = "address";
+    public static final String KEY_PlanId = "planid";
+    public static final String KEY_Amount = "amount";
+    public static final String KEY_Discount = "discount";
+    public static final String KEY_PlanTitle = "plantitle";
+    private static final String IS_CART_FULL = "IsCartFull";
+    private static final String IS_ADDRESS_CHOSEN = "IsAddressChosen";
+    private static final String KEY_DeliverTo = "DeliverTo";
     //    Shared Preferences reference
     SharedPreferences preferences;
     //Editor reference for shared preferences
@@ -41,13 +50,32 @@ public class UserSessionManager {
     }
 
     //    Create Login Session
-    public void createUserLoginSession(String user_id, String username, String email, String auth_token, String role) {//, String roleid, String rolename, String profileimage, String companyid, String companyname, String siteid, String sitename) {
+    public void createUserLoginSession(String user_id, String username, String email, String auth_token, String role, String addressid, String address) {//, String roleid, String rolename, String profileimage, String companyid, String companyname, String siteid, String sitename) {
         editor.putBoolean(IS_USER_LOGIN, true);
         editor.putString(KEY_UserId, user_id);
         editor.putString(KEY_UserName, username);
         editor.putString(KEY_Email, email);
         editor.putString(KEY_AuthToken, auth_token);
         editor.putString(KEY_Role, role);
+        editor.putString(KEY_AddressID, addressid);
+        editor.putString(KEY_Address, address);
+        editor.commit();
+    }
+
+    public void createPlanData(String planid, String plantitle, String planamount, String plandiscount) {
+        editor.putBoolean(IS_CART_FULL, true);
+        editor.putString(KEY_PlanId, planid);
+        editor.putString(KEY_PlanTitle, plantitle);
+        editor.putString(KEY_Amount, planamount);
+        editor.putString(KEY_Discount, plandiscount);
+        editor.commit();
+    }
+
+    public void createDeliveryAddress(String addressid, String address, String deliverTo) {
+        editor.putBoolean(IS_ADDRESS_CHOSEN, true);
+        editor.putString(KEY_AddressID, addressid);
+        editor.putString(KEY_Address, address);
+        editor.putString(KEY_DeliverTo, deliverTo);
         editor.commit();
     }
 
@@ -75,6 +103,7 @@ public class UserSessionManager {
         return false;
     }
 
+
     /**
      * Check For Login
      *
@@ -83,6 +112,53 @@ public class UserSessionManager {
     public boolean isUserLoggedIn() {
         return preferences.getBoolean(IS_USER_LOGIN, false);
     }
+
+    public boolean checkCart() {
+        if (!(this.isCartFull())) {
+//            user is not logged in redirect to login activity
+            Intent intent = new Intent(mContext, PlanActivity.class);
+
+////            Close all activities from stack
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+////            Add new flag to start new Activity
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+//            Starting login activity
+            mContext.startActivity(intent);
+
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isCartFull() {
+        return preferences.getBoolean(IS_CART_FULL, false);
+    }
+
+    public boolean checkDeliveryAddress() {
+        if (!(this.isDeliveryAddress())) {
+//            user is not logged in redirect to login activity
+            Intent intent = new Intent(mContext, DeliveryAddressActivity.class);
+//
+////            Close all activities from stack
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+////            Add new flag to start new Activity
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+//            Starting login activity
+            mContext.startActivity(intent);
+
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isDeliveryAddress() {
+        return preferences.getBoolean(IS_ADDRESS_CHOSEN, false);
+    }
+
 
     /**
      * Get Stored Session Data
@@ -100,8 +176,19 @@ public class UserSessionManager {
         return user;
     }
 
+    public HashMap<String, String> getPlanData() {
+        HashMap<String, String> plan = new HashMap<>();
+        plan.put(KEY_PlanId, preferences.getString(KEY_PlanId, null));
+        plan.put(KEY_AddressID, preferences.getString(KEY_AddressID, null));
+        plan.put(KEY_Address, preferences.getString(KEY_Address, null));
+        plan.put(KEY_PlanTitle, preferences.getString(KEY_PlanTitle, null));
+        plan.put(KEY_Amount, preferences.getString(KEY_Amount, null));
+        plan.put(KEY_Discount, preferences.getString(KEY_Discount, null));
+        return plan;
+    }
+
+
     public void logoutUser(String emp_code) {
-        APIService service = ClientInstance.getRetrofitInstance().create(APIService.class);
 
         /**
          * Clearing all data from shared preferrences

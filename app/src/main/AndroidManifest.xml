@@ -16,7 +16,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
-        <activity android:name=".ui.PaymentActivity"></activity>
+        <activity android:name=".DeliveryAddressActivity"></activity>
+        <activity
+            android:name=".ui.PaymentActivity"
+            android:parentActivityName=".ui.PlanActivity"
+            android:theme="@style/MaterialTheme" />
         <activity
             android:name=".ui.MySubscriptionActivity"
             android:parentActivityName=".ui.MainActivity"
@@ -53,7 +57,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <!-- Add your API key here -->
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_Stz3XTNgLklxqr" />
     </application>
 
 </manifest>
