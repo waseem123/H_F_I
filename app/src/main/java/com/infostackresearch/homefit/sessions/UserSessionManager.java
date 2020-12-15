@@ -71,6 +71,8 @@ public class UserSessionManager {
         editor.commit();
     }
 
+    /*Following code is to create address in session for user delivery*/
+
     public void createDeliveryAddress(String addressid, String address, String deliverTo) {
         editor.putBoolean(IS_ADDRESS_CHOSEN, true);
         editor.putString(KEY_AddressID, addressid);
